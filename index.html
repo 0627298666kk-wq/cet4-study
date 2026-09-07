@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3efe4">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="四级训练台">
+  <title>四级训练台｜目标 500</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <button class="brand" id="homeButton" aria-label="回到今日训练">CET·LAB <span>412 → 500</span></button>
+      <button class="menu-button" id="menuButton" aria-label="打开导航" aria-expanded="false">菜单</button>
+      <nav id="mainNav" aria-label="主导航">
+        <button data-view="today" class="nav-item active">今日</button>
+        <button data-view="listening" class="nav-item">精听</button>
+        <button data-view="vocab" class="nav-item">词汇</button>
+        <button data-view="reading" class="nav-item">阅读</button>
+        <button data-view="writing" class="nav-item">写译</button>
+        <button data-view="progress" class="nav-item">记录</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="view active" id="today" aria-labelledby="todayTitle">
+        <div class="date-line" id="dateLine"></div>
+        <div class="hero">
+          <div>
+            <h1 id="todayTitle">今天，先让英语<br><em>听得见。</em></h1>
+            <p>你的听力是当前最大提分空间。今天只做一轮：辨音、理解、复听、记录。</p>
+          </div>
+          <div class="score-track" aria-label="当前分数到目标分数">
+            <span class="score-now">412</span>
+            <div class="track"><i></i></div>
+            <span class="score-goal">500</span>
+          </div>
+        </div>
+
+        <div class="session-board">
+          <div class="session-head">
+            <div>
+              <h2>今日 40 分钟</h2>
+              <p id="phaseText">软考前保持英语不断线</p>
+            </div>
+            <span class="session-total"><b id="completedMinutes">0</b> / 40 MIN</span>
+          </div>
+          <div class="task-list" id="taskList"></div>
+          <button class="primary" data-go="listening">开始今日精听 <span>→</span></button>
+        </div>
+
+        <div class="principle-strip">
+          <strong>本周原则</strong>
+          <span>每天一小段，听懂比听多更重要</span>
+          <span>每个错题只归一个主因</span>
+          <span>周日检查陌生材料</span>
+        </div>
+      </section>
+
+      <section class="view" id="listening" aria-labelledby="listenTitle">
+        <div class="section-heading">
+          <div><h1 id="listenTitle" tabindex="-1">精听工作台</h1></div>
+          <p>先盲听作答，再看原文拆声音。练熟一段不算进步，听懂下一段才算。</p>
+        </div>
+        <div class="lab-layout">
+          <aside class="material-list" id="listeningList" aria-label="听力材料列表"></aside>
+          <article class="player-panel">
+            <div class="player-meta"><span id="listenType"></span><span id="listenLevel"></span></div>
+            <h2 id="listenTitleText"></h2>
+            <div class="wave" aria-hidden="true" id="wave"></div>
+            <div class="player-controls">
+              <button class="play-button" id="playAudio">播放全文</button>
+              <button class="speed-button active" data-rate="0.75" aria-pressed="true">0.75×</button>
+              <button class="speed-button" data-rate="1" aria-pressed="false">1.0×</button>
+            </div>
+            <p class="audio-status" id="audioStatus" aria-live="polite"></p>
+            <div class="listen-step" id="listenStep"></div>
+            <div class="question-box" id="listenQuestion"></div>
+            <details class="transcript" id="transcriptBox">
+              <summary>第二遍后再打开原文</summary>
+              <p id="transcriptText"></p>
+              <div id="sentenceButtons"></div>
+            </details>
+            <div class="diagnosis">
+              <h3>这题没听懂，主要卡在哪里？</h3>
+              <div class="reason-grid" id="reasonGrid">
+                <button data-reason="词不认识" aria-pressed="false">词不认识</button>
+                <button data-reason="认识但没听出" aria-pressed="false">认识但没听出</button>
+                <button data-reason="句子没理解" aria-pressed="false">句子没理解</button>
+                <button data-reason="听懂但选错" aria-pressed="false">听懂但选错</button>
+              </div>
+            </div>
+            <button class="primary" id="finishListening">完成本段并进入下一段 <span>→</span></button>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="vocab" aria-labelledby="vocabTitle">
+        <div class="section-heading"><div><h1 id="vocabTitle" tabindex="-1">听力词库</h1></div><p>不背孤立单词。先听声音，再回忆含义，最后看它在句子里如何出现。</p></div>
+        <div class="word-audio"><button class="secondary" id="speakWord">播放当前单词</button></div>
+        <div class="flashcard" id="flashcard">
+          <button class="card-side front" id="flipCard" aria-expanded="false"><span id="wordIndex"></span><h2 id="wordText"></h2><p id="wordHint">先说出含义，再点击翻面</p></button>
+          <div class="card-side back" id="cardBack" aria-hidden="true"><span id="phonetic"></span><h2 id="meaning"></h2><p id="example"></p></div>
+        </div>
+        <div class="recall-controls"><button class="secondary" data-recall="again">没记住</button><button class="secondary" data-recall="hard">模糊</button><button class="primary" data-recall="good">记住了 <span>→</span></button></div>
+      </section>
+
+      <section class="view" id="reading" aria-labelledby="readingTitle">
+        <div class="section-heading"><div><h1 id="readingTitle" tabindex="-1">限时阅读</h1></div><p>阅读占 35%。你目前的阅读是稳定基础，每周两次，保住正确率并逐步提速。</p></div>
+        <article class="reading-sheet">
+          <div class="reading-tools"><span>建议用时 8:00</span><button id="readingTimer">开始计时</button></div>
+          <h2>A quieter kind of progress</h2>
+          <p>Students often measure language learning by the number of words they memorize or the hours they spend studying. Yet progress is sometimes easier to notice in ordinary moments. A learner may suddenly understand an announcement at a railway station, recognize a phrase in a podcast, or write an email without translating every sentence first.</p>
+          <p>These small changes matter because they show that knowledge is becoming automatic. Researchers commonly describe practice as more effective when learners return to material after a delay and attempt to recall it before seeing the answer. The effort may feel uncomfortable, but that difficulty can strengthen memory.</p>
+          <p>For busy students, this suggests a practical approach: choose a small amount of material, test yourself, check the answer, and revisit it later. A short session with active recall can be more useful than a long session spent simply rereading notes.</p>
+          <div class="reading-question">
+            <h3>What is the main idea of the passage?</h3>
+            <label><input type="radio" name="reading" value="a"> Language progress can only be measured by tests.</label>
+            <label><input type="radio" name="reading" value="b"> Short, effortful recall can reveal and strengthen progress.</label>
+            <label><input type="radio" name="reading" value="c"> Busy students should avoid difficult materials.</label>
+            <label><input type="radio" name="reading" value="d"> Memorizing more words is always the best method.</label>
+            <button class="primary" id="checkReading">提交答案</button>
+            <p class="feedback" id="readingFeedback" aria-live="polite"></p>
+          </div>
+        </article>
+      </section>
+
+      <section class="view" id="writing" aria-labelledby="writingTitle">
+        <div class="section-heading"><div><h1 id="writingTitle" tabindex="-1">写译训练</h1></div><p>写作和翻译共占 30%。训练目标是稳定、准确、按时写完。</p></div>
+        <div class="writing-grid">
+          <article class="prompt-sheet"><span>今日作文 · 30 MIN</span><h2>Directions</h2><p>Suppose your university is collecting students' opinions on how to make better use of campus study spaces. Write a short essay to explain your suggestions.</p><ul><li>明确表达建议</li><li>给出两个具体理由或措施</li><li>建议 120–180 词</li></ul></article>
+          <div class="editor-wrap"><div class="editor-tools"><span id="wordCount">0 words</span><button id="clearWriting">清空</button></div><textarea id="writingEditor" placeholder="在这里开始写。先求句子准确，再求表达丰富……"></textarea></div>
+        </div>
+        <details class="framework"><summary>写完后查看结构检查表</summary><div><p><b>开头：</b>直接说明问题和你的建议。</p><p><b>主体：</b>一个措施配一个原因或结果。</p><p><b>结尾：</b>总结这些措施能带来的实际改善。</p><p><b>检查：</b>主谓一致、时态、单复数、拼写、词数。</p></div></details>
+      </section>
+
+      <section class="view" id="progress" aria-labelledby="progressTitle">
+        <div class="section-heading"><div><h1 id="progressTitle" tabindex="-1">训练记录</h1></div><p>这里记录训练行为和错误类型，不虚构换算后的四级预测分。</p></div>
+        <div class="progress-grid">
+          <div class="big-stat"><span>连续学习</span><strong id="streakCount">0<small> 天</small></strong></div>
+          <div class="big-stat"><span>已完成训练</span><strong id="sessionCount">0<small> 项</small></strong></div>
+          <div class="diagnostic-chart" id="diagnosticChart"></div>
+        </div>
+        <div class="data-actions"><button class="secondary" id="exportData">导出学习记录</button><button class="text-button" id="resetData">重置本机记录</button></div>
+        <div class="source-note"><h2>资料说明</h2><p>平台内练习为原创模拟材料，用于训练方法和基础能力，不冒充官方真题。正式备考请优先配合正规出版的历年真题。</p><a href="https://cet.neea.edu.cn/html1/folder/16113/1586-1.htm" target="_blank" rel="noreferrer">查看教育考试院 CET-4 官方题型说明 ↗</a></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
+

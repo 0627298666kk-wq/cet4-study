@@ -1,5 +1,5 @@
-const CACHE='cet-lab-v1';
-const APP=['./','./index.html','./styles.css','./app.js','./manifest.json','./icon.svg'];
+const CACHE='cet-lab-v3';
+const APP=['./','./index.html','./styles.css','./bank.js','./app.js','./manifest.json','./icon.svg','./personal-bank-template.json'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(APP)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{

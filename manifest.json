@@ -1,0 +1,15 @@
+{
+  "name": "四级训练台｜目标 500",
+  "short_name": "四级训练台",
+  "description": "针对听力薄弱项设计的 CET-4 每日训练平台",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3efe4",
+  "theme_color": "#155d42",
+  "icons": [
+    {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}
+

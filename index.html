@@ -60,6 +60,7 @@
           <span>每天一小段，听懂比听多更重要</span>
           <span>每个错题只归一个主因</span>
           <span>周日检查陌生材料</span>
+          <span id="bankSummary">正在载入题库…</span>
         </div>
       </section>
 
@@ -115,16 +116,11 @@
         <div class="section-heading"><div><h1 id="readingTitle" tabindex="-1">限时阅读</h1></div><p>阅读占 35%。你目前的阅读是稳定基础，每周两次，保住正确率并逐步提速。</p></div>
         <article class="reading-sheet">
           <div class="reading-tools"><span>建议用时 8:00</span><button id="readingTimer">开始计时</button></div>
-          <h2>A quieter kind of progress</h2>
-          <p>Students often measure language learning by the number of words they memorize or the hours they spend studying. Yet progress is sometimes easier to notice in ordinary moments. A learner may suddenly understand an announcement at a railway station, recognize a phrase in a podcast, or write an email without translating every sentence first.</p>
-          <p>These small changes matter because they show that knowledge is becoming automatic. Researchers commonly describe practice as more effective when learners return to material after a delay and attempt to recall it before seeing the answer. The effort may feel uncomfortable, but that difficulty can strengthen memory.</p>
-          <p>For busy students, this suggests a practical approach: choose a small amount of material, test yourself, check the answer, and revisit it later. A short session with active recall can be more useful than a long session spent simply rereading notes.</p>
+          <h2 id="readingPassageTitle">A quieter kind of progress</h2>
+          <div id="readingPassage"><p>Students often measure language learning by the number of words they memorize or the hours they spend studying. Yet progress is sometimes easier to notice in ordinary moments.</p></div>
           <div class="reading-question">
-            <h3>What is the main idea of the passage?</h3>
-            <label><input type="radio" name="reading" value="a"> Language progress can only be measured by tests.</label>
-            <label><input type="radio" name="reading" value="b"> Short, effortful recall can reveal and strengthen progress.</label>
-            <label><input type="radio" name="reading" value="c"> Busy students should avoid difficult materials.</label>
-            <label><input type="radio" name="reading" value="d"> Memorizing more words is always the best method.</label>
+            <h3 id="readingQuestionText">What is the main idea of the passage?</h3>
+            <div id="readingOptions"></div>
             <button class="primary" id="checkReading">提交答案</button>
             <p class="feedback" id="readingFeedback" aria-live="polite"></p>
           </div>
@@ -134,7 +130,7 @@
       <section class="view" id="writing" aria-labelledby="writingTitle">
         <div class="section-heading"><div><h1 id="writingTitle" tabindex="-1">写译训练</h1></div><p>写作和翻译共占 30%。训练目标是稳定、准确、按时写完。</p></div>
         <div class="writing-grid">
-          <article class="prompt-sheet"><span>今日作文 · 30 MIN</span><h2>Directions</h2><p>Suppose your university is collecting students' opinions on how to make better use of campus study spaces. Write a short essay to explain your suggestions.</p><ul><li>明确表达建议</li><li>给出两个具体理由或措施</li><li>建议 120–180 词</li></ul></article>
+          <article class="prompt-sheet"><span>今日作文 · 30 MIN</span><h2>Directions</h2><p id="writingPrompt"></p><ul><li>明确表达观点</li><li>给出两个具体理由或措施</li><li>建议 120–180 词</li></ul><div class="translation-prompt"><b>今日翻译</b><p id="translationPrompt"></p></div></article>
           <div class="editor-wrap"><div class="editor-tools"><span id="wordCount">0 words</span><button id="clearWriting">清空</button></div><textarea id="writingEditor" placeholder="在这里开始写。先求句子准确，再求表达丰富……"></textarea></div>
         </div>
         <details class="framework"><summary>写完后查看结构检查表</summary><div><p><b>开头：</b>直接说明问题和你的建议。</p><p><b>主体：</b>一个措施配一个原因或结果。</p><p><b>结尾：</b>总结这些措施能带来的实际改善。</p><p><b>检查：</b>主谓一致、时态、单复数、拼写、词数。</p></div></details>
@@ -148,11 +144,17 @@
           <div class="diagnostic-chart" id="diagnosticChart"></div>
         </div>
         <div class="data-actions"><button class="secondary" id="exportData">导出学习记录</button><button class="text-button" id="resetData">重置本机记录</button></div>
+        <section class="import-panel" aria-labelledby="importTitle">
+          <div><h2 id="importTitle">导入个人真题包</h2><p>选择本机 JSON 题包。文件只保存在当前浏览器，不会上传到 GitHub。支持 listening 和 words 两类内容。</p></div>
+          <div class="import-actions"><a href="personal-bank-template.json" download>下载题包模板</a><label class="file-button">选择题包<input type="file" id="importBank" accept="application/json,.json"></label></div>
+          <p id="importStatus" role="status" aria-live="polite"></p>
+        </section>
         <div class="source-note"><h2>资料说明</h2><p>平台内练习为原创模拟材料，用于训练方法和基础能力，不冒充官方真题。正式备考请优先配合正规出版的历年真题。</p><a href="https://cet.neea.edu.cn/html1/folder/16113/1586-1.htm" target="_blank" rel="noreferrer">查看教育考试院 CET-4 官方题型说明 ↗</a></div>
       </section>
     </main>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="bank.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

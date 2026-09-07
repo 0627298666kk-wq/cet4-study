@@ -1,0 +1,22 @@
+{
+  "listening": [
+    {
+      "type": "个人真题",
+      "level": "导入 01",
+      "title": "请填写材料标题",
+      "text": "Paste the listening transcript here.",
+      "question": "Paste one question here.",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
+      "answer": 0
+    }
+  ],
+  "words": [
+    {
+      "w": "example",
+      "p": "/ɪɡˈzɑːmpl/",
+      "m": "例子",
+      "e": "This is an example sentence."
+    }
+  ]
+}
+
